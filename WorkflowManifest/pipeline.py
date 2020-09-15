@@ -8,7 +8,7 @@ from kubernetes.client.models import V1EnvVar, V1SecretKeySelector
     description = "Hanjoo's tibero agent : test version"
 )
 
-def tibero_agent_pipeline():
+def tibero_pipeline_test():
     pod1 = dsl.ContainerOp(
         name = "pod1",
         image = "sqlagent:0.1",
