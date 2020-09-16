@@ -1,31 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
-  generateName: tibero-agent-test-
-  annotations: {pipelines.kubeflow.org/kfp_sdk_version: 1.0.0, pipelines.kubeflow.org/pipeline_compilation_time: '2020-09-15T17:58:37.195542',
-    pipelines.kubeflow.org/pipeline_spec: '{"description": "Hanjoo''s tibero agent
-      : test version", "name": "tibero-agent-test"}'}
+  generateName: hell-tmax-
+  annotations: {pipelines.kubeflow.org/kfp_sdk_version: 1.0.0, pipelines.kubeflow.org/pipeline_compilation_time: '2020-09-16T17:42:55.989907',
+    pipelines.kubeflow.org/pipeline_spec: '{"description": "Test - hell Tmax", "name":
+      "hell_tmax"}'}
   labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.0.0}
 spec:
-  entrypoint: tibero-agent-test
+  entrypoint: hell-tmax
   templates:
-  - name: pod1
-    container:
-      env:
-      - {name: id, value: hanjoo}
-      - {name: pw, value: '1010'}
-      image: sqlagent:0.1
-  - name: pod2a
-    container: {image: 'sqlagent:0.2'}
-  - name: pod2b
-    container: {image: 'sqlagent:0.2'}
-  - name: pod3
-    container:
-      env:
-      - {name: id, value: hanjoo}
-      - {name: pw, value: '1010'}
-      image: sqlagent:0.1
-  - name: tibero-agent-test
+  - name: hell-tmax
     dag:
       tasks:
       - {name: pod1, template: pod1}
@@ -38,6 +22,14 @@ spec:
       - name: pod3
         template: pod3
         dependencies: [pod2a, pod2b]
+  - name: pod1
+    container: {image: 'hanjoo8821/helltmax:0.1'}
+  - name: pod2a
+    container: {image: 'hanjoo8821/helltmax:0.1'}
+  - name: pod2b
+    container: {image: 'hanjoo8821/helltmax:0.1'}
+  - name: pod3
+    container: {image: 'hanjoo8821/helltmax:0.1'}
   arguments:
     parameters: []
   serviceAccountName: pipeline-runner

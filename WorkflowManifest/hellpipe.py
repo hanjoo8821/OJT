@@ -33,5 +33,4 @@ def hell_tmax():
     pod3.after(pod2a, pod2b)
     
 if __name__ == "__main__":
-    import kfp.compiler as compiler
-    compiler.Compiler().compile(hell_tmax, __file__ + ".tar.gz")
+    kfp.compiler.Compiler().compile(hell_tmax, __file__ + ".tar.gz")
