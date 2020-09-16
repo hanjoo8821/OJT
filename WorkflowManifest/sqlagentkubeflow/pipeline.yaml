@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: tibero-agent-dummy-
+  annotations: {pipelines.kubeflow.org/kfp_sdk_version: 1.0.0, pipelines.kubeflow.org/pipeline_compilation_time: '2020-09-10T10:21:07.986027',
+    pipelines.kubeflow.org/pipeline_spec: '{"description": "jin tibero agent test",
+      "name": "tibero-agent-dummy"}'}
+  labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.0.0}
+spec:
+  entrypoint: tibero-agent-dummy
+  templates:
+  - name: pod1
+    container:
+      env:
+      - {name: agent_ip, value: 192.1.4.31}
+      - {name: agent_port, value: '8629'}
+      - {name: agent_id, value: tibero}
+      - {name: agent_pw, value: tmax}
+      - {name: agent_sql, value: SELECT * FROM ALL_USERS}
+      image: jjh2613/tibero-agent:3.0
+  - name: pod2
+    container:
+      env:
+      - {name: agent_ip, value: 192.1.4.31}
+      - {name: agent_port, value: '8629'}
+      - {name: agent_id, value: tibero}
+      - {name: agent_pw, value: tmax}
+      - {name: agent_sql, value: SELECT * FROM ALL_USERS}
+      image: jjh2613/tibero-agent:3.0
+  - name: pod3
+    container:
+      env:
+      - {name: agent_ip, value: 192.1.4.31}
+      - {name: agent_port, value: '8629'}
+      - {name: agent_id, value: tibero}
+      - {name: agent_pw, value: tmax}
+      - {name: agent_sql, value: SELECT * FROM ALL_USERS}
+      image: jjh2613/tibero-agent:3.0
+  - name: tibero-agent-dummy
+    dag:
+      tasks:
+      - {name: pod1, template: pod1}
+      - name: pod2
+        template: pod2
+        dependencies: [pod1]
+      - name: pod3
+        template: pod3
+        dependencies: [pod2]
+  arguments:
+    parameters: []
+  serviceAccountName: pipeline-runner
