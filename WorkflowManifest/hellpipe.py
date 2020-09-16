@@ -1,8 +1,5 @@
 import kfp
-import kfp.components as comp
 from kfp import dsl
-from kubernetes.client.models import V1EnvVar
-import yaml
 
 @dsl.pipeline(
     name = "hell_tmax",
