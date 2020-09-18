@@ -6,14 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="JdbcAgentEx" />
-        <module name="JdbcAgentmenu" />
-        <module name="DockerImage-JdbcAgent" />
-        <module name="JdbcAgentmenueeee" />
+        <module name="JdbcAgent_menu" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="JdbcAgent" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
