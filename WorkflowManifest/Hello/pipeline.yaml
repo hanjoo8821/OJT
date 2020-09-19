@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
   generateName: hell-tmax-
-  annotations: {pipelines.kubeflow.org/kfp_sdk_version: 1.0.0, pipelines.kubeflow.org/pipeline_compilation_time: '2020-09-16T17:42:55.989907',
+  annotations: {pipelines.kubeflow.org/kfp_sdk_version: 1.0.0, pipelines.kubeflow.org/pipeline_compilation_time: '2020-09-18T11:19:31.245109',
     pipelines.kubeflow.org/pipeline_spec: '{"description": "Test - hell Tmax", "name":
       "hell_tmax"}'}
   labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.0.0}

@@ -6,8 +6,7 @@ from kfp import dsl
     description = "Test - hell Tmax"
 )
 
-def hell_tmax():
-    
+def hell_tmax(): 
     pod1 = dsl.ContainerOp(
         name = "pod1",
         image = "hanjoo8821/helltmax:0.1"

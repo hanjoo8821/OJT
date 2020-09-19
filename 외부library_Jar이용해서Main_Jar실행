@@ -1,1 +1,1 @@
-java -cp "./JdbcAgentEx-1.0.jar:./lib/tibero/tibero6jdbc/1.0/tibero6jdbc-1.0.jar" local.hanjoo.JdbcAgent
+java -cp "./JdbcAgentEx-{버전}.jar:./lib/tibero/tibero6jdbc/1.0/tibero6jdbc-1.0.jar" local.hanjoo.JdbcAgent

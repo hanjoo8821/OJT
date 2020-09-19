@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: tibero-agent-basic-
+  annotations: {pipelines.kubeflow.org/kfp_sdk_version: 1.0.0, pipelines.kubeflow.org/pipeline_compilation_time: '2020-09-19T15:14:06.653450',
+    pipelines.kubeflow.org/pipeline_spec: '{"description": "Hanjoo''s tibero agent
+      : basic version", "name": "tibero-agent:basic"}'}
+  labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.0.0}
+spec:
+  entrypoint: tibero-agent-basic
+  templates:
+  - name: sql1
+    container:
+      env:
+      - {name: id, value: hanjoo}
+      - {name: pw, value: 1010}
+      image: hanjoo8821/jdbc-tibero:basic2
+  - name: sql2a
+    container:
+      env:
+      - {name: id, value: hanjoo}
+      - {name: pw, value: 1010}
+      image: hanjoo8821/jdbc-tibero:basic2
+  - name: sql2b
+    container:
+      env:
+      - {name: id, value: hanjoo}
+      - {name: pw, value: 1010}
+      image: hanjoo8821/jdbc-tibero:basic2
+  - name: sql3
+    container:
+      env:
+      - {name: id, value: hanjoo}
+      - {name: pw, value: 1010}
+      image: hanjoo8821/jdbc-tibero:basic2
+  - name: tibero-agent-basic
+    dag:
+      tasks:
+      - {name: sql1, template: sql1}
+      - name: sql2a
+        template: sql2a
+        dependencies: [sql1]
+      - name: sql2b
+        template: sql2b
+        dependencies: [sql1]
+      - name: sql3
+        template: sql3
+        dependencies: [sql2a, sql2b]
+  arguments:
+    parameters: []
+  serviceAccountName: pipeline-runner

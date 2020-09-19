@@ -1,7 +1,5 @@
 import kfp
-import kfp.components as comp
 from kfp import dsl
-from kubernetes.client.models import V1EnvVar, V1SecretKeySelector
 
 @dsl.pipeline(
     name = "tibero-agent-test",
@@ -11,24 +9,22 @@ from kubernetes.client.models import V1EnvVar, V1SecretKeySelector
 def tibero_pipeline_test():
     pod1 = dsl.ContainerOp(
         name = "pod1",
-        image = "sqlagent:0.1",
-        container_kwargs = {'env':[V1EnvVar('id', 'hanjoo'), V1EnvVar('pw', '1010')]}
+        image = "hanjoo8821/tibero-agent:basic"
     )
 
     pod2a = dsl.ContainerOp(
         name = "pod2a",
-        image = "sqlagent:0.2"
+        image = "hanjoo8821/tibero-agent:basic"
     )
 
     pod2b = dsl.ContainerOp(
         name = "pod2b",
-        image = "sqlagent:0.2"
+        image = "hanjoo8821/tibero-agent:basic"
     )
 
     pod3 = dsl.ContainerOp(
         name = "pod3",
-        image = "sqlagent:0.1",
-        container_kwargs = {'env':[V1EnvVar('id', 'hanjoo'), V1EnvVar('pw', '1010')]}
+        image = "hanjoo8821/tibero-agent:basic"
     )
 
     pod2a.after(pod1)
@@ -36,5 +32,4 @@ def tibero_pipeline_test():
     pod3.after(pod2a, pod2b)
     
 if __name__ == "__main__":
-    import kfp.compiler as compiler
-    compiler.Compiler().compile(tibero_pipeline_test, __file__ + ".tar.gz")
+    kfp.compiler.Compiler().compile(tibero_pipeline_test, __file__ + ".tar.gz")
