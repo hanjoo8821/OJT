@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>local.hanjoo</groupId>
+    <artifactId>JdbcAgentEx</artifactId>
+    <version>ML</version>
+    <name>JdbcAgentEx</name>
+    <packaging>jar</packaging>
+
+    <properties>
+        <agentlibrary.dir>./lib</agentlibrary.dir>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>tibero</groupId>
+            <artifactId>tibero6jdbc</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>local-repository</id>
+            <name>local repository</name>
+            <url>file://${project.basedir}/lib</url>
+        </repository>
+    </repositories>
+
+    <build>
+        <defaultGoal>package</defaultGoal>
+
+        <sourceDirectory>src/main/java</sourceDirectory>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!-- jar 파일 META-INF/MANIFEST.MF 에 클래스패스 정보 추가 -->
+                            <addClasspath>true</addClasspath>
+                            <!-- public static void main() 함수가 있는 클래스 지정 -->
+                            <mainClass>local.hanjoo.JdbcAgent</mainClass>
+                        </manifest>
+                    </archive>
+                    <outputDirectory>${project.basedir}</outputDirectory>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${project.build.outputDirectory}</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

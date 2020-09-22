@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
   generateName: tibero-agent-basic-
-  annotations: {pipelines.kubeflow.org/kfp_sdk_version: 1.0.0, pipelines.kubeflow.org/pipeline_compilation_time: '2020-09-19T15:29:00.052952',
+  annotations: {pipelines.kubeflow.org/kfp_sdk_version: 1.0.0, pipelines.kubeflow.org/pipeline_compilation_time: '2020-09-22T16:04:07.984318',
     pipelines.kubeflow.org/pipeline_spec: '{"description": "Hanjoo''s tibero agent
       : basic version", "name": "tibero-agent:basic"}'}
   labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.0.0}
@@ -13,38 +13,26 @@ spec:
     container:
       env:
       - {name: id, value: hanjoo}
-      - {name: pw, value: 1010}
+      - {name: pw, value: '1010'}
       image: hanjoo8821/jdbc-tibero:basic
-    outputs:
-      artifacts:
-      - {name: sql1-output, path: /tmp/result.txt}
   - name: sql2a
     container:
       env:
       - {name: id, value: hanjoo}
-      - {name: pw, value: 1010}
+      - {name: pw, value: '1010'}
       image: hanjoo8821/jdbc-tibero:basic
-    outputs:
-      artifacts:
-      - {name: sql2a-output, path: /tmp/result.txt}
   - name: sql2b
     container:
       env:
       - {name: id, value: hanjoo}
-      - {name: pw, value: 1010}
+      - {name: pw, value: '1010'}
       image: hanjoo8821/jdbc-tibero:basic
-    outputs:
-      artifacts:
-      - {name: sql2b-output, path: /tmp/result.txt}
   - name: sql3
     container:
       env:
       - {name: id, value: hanjoo}
-      - {name: pw, value: 1010}
+      - {name: pw, value: '1010'}
       image: hanjoo8821/jdbc-tibero:basic
-    outputs:
-      artifacts:
-      - {name: sql3-output, path: /tmp/result.txt}
   - name: tibero-agent-basic
     dag:
       tasks:

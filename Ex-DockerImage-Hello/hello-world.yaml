@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: print-test
+spec:
+  containers:
+    - name: print
+      image: hanjoo8821/hell:ex

@@ -6,8 +6,7 @@ def query_op(n):
     return dsl.ContainerOp(
         name = n,
         image = "hanjoo8821/jdbc-tibero:basic",
-        container_kwargs = {'env': [V1EnvVar('id', 'hanjoo'), V1EnvVar('pw', 1010)]},
-        file_outputs = {'output': '/tmp/result.txt'}
+        container_kwargs = {'env': [V1EnvVar('id', 'hanjoo'), V1EnvVar('pw', '1010')]}
     )
 
 @dsl.pipeline(

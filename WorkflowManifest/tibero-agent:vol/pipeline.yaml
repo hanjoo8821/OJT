@@ -1,0 +1,81 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: tibero-agent-vol-
+  annotations: {pipelines.kubeflow.org/kfp_sdk_version: 1.0.0, pipelines.kubeflow.org/pipeline_compilation_time: '2020-09-22T16:09:05.583340',
+    pipelines.kubeflow.org/pipeline_spec: '{"description": "Hanjoo''s tibero agent
+      : vol version", "name": "tibero-agent:vol"}'}
+  labels: {pipelines.kubeflow.org/kfp_sdk_version: 1.0.0}
+spec:
+  entrypoint: tibero-agent-vol
+  templates:
+  - name: print
+    container:
+      command: [cat, /data/output]
+      image: hanjoo8821/jdbc-tibero:null
+      volumeMounts:
+      - {mountPath: /data, name: test-pv}
+    inputs:
+      parameters:
+      - {name: test-pv-name}
+    volumes:
+    - name: test-pv
+      persistentVolumeClaim: {claimName: '{{inputs.parameters.test-pv-name}}'}
+  - name: sql
+    container:
+      args: ['java -cp "./JdbcAgentEx-null.jar:./tibero6jdbc-1.0.jar" local.hanjoo.JdbcAgent
+          "$id" "$pw" | tee /data/output']
+      command: [sh, -c]
+      env:
+      - {name: id, value: hanjoo}
+      - {name: pw, value: '1010'}
+      image: hanjoo8821/jdbc-tibero:null
+      volumeMounts:
+      - {mountPath: /data, name: test-pv}
+    inputs:
+      parameters:
+      - {name: test-pv-name}
+    volumes:
+    - name: test-pv
+      persistentVolumeClaim: {claimName: '{{inputs.parameters.test-pv-name}}'}
+  - name: test-pv
+    resource:
+      action: create
+      manifest: |
+        apiVersion: v1
+        kind: PersistentVolumeClaim
+        metadata:
+          name: '{{workflow.name}}-pvc'
+        spec:
+          accessModes:
+          - ReadWriteMany
+          resources:
+            requests:
+              storage: 100Mi
+    outputs:
+      parameters:
+      - name: test-pv-manifest
+        valueFrom: {jsonPath: '{}'}
+      - name: test-pv-name
+        valueFrom: {jsonPath: '{.metadata.name}'}
+      - name: test-pv-size
+        valueFrom: {jsonPath: '{.status.capacity.storage}'}
+  - name: tibero-agent-vol
+    dag:
+      tasks:
+      - name: print
+        template: print
+        dependencies: [sql, test-pv]
+        arguments:
+          parameters:
+          - {name: test-pv-name, value: '{{tasks.test-pv.outputs.parameters.test-pv-name}}'}
+      - name: sql
+        template: sql
+        dependencies: [test-pv]
+        arguments:
+          parameters:
+          - {name: test-pv-name, value: '{{tasks.test-pv.outputs.parameters.test-pv-name}}'}
+      - {name: test-pv, template: test-pv}
+  arguments:
+    parameters: []
+  serviceAccountName: pipeline-runner

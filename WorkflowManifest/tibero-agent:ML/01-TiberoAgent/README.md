@@ -1,0 +1,1 @@
+java -cp "./JdbcAgentEx-ML.jar:./lib/tibero/tibero6jdbc/1.0/tibero6jdbc-1.0.jar" local.hanjoo.JdbcAgent "hanjoo" "1010" "AB1_2" "EMP_NUM"
