@@ -51,6 +51,14 @@ public class JdbcAgent {
         tibero.showCol();
         tibero.outCol();
 
+        tibero.setCol(args[4]);
+        tibero.showCol();
+        tibero.outCol();
+
+        tibero.setCol(args[5]);
+        tibero.showCol();
+        tibero.outCol();
+
         con.close();
     }
 }

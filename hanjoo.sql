@@ -1,22 +1,23 @@
 CREATE TABLE AB1_2
 (
-	NAME	 NVARCHAR2(8)	NOT NULL,
-	EMP_NUM NUMBER(7) NOT NULL,
-	EMAIL 	 NVARCHAR2(40),
-	PHONE	 NVARCHAR2(30),
-	ROOM	 NUMBER(4),
+	NAME	  NVARCHAR2(8)	NOT NULL,
+	EMP_NUM  NUMBER(7) NOT NULL,
+	EMAIL 	  NVARCHAR2(40),
+	PHONE	  NVARCHAR2(30),
+	ROOM	  NUMBER(4),
+	BIRTH	  DATE,
 	
 	CONSTRAINT PK_NUM PRIMARY KEY (EMP_NUM)
 );
 
-INSERT INTO AB1_2 VALUES ('정민수', 2019150, 'minsoo_sung@tmax.co.kr', '010-2301-5625', 5138);
-INSERT INTO AB1_2 VALUES ('진재혁', 2018139, 'jaehyeok_jin@tmax.co.kr', '010-5062-9197', 5021);
-INSERT INTO AB1_2 VALUES ('정춘순', 2019268, 'chungsun_jeong@tmax.co.kr', '010-9957-1931', 5062);
-INSERT INTO AB1_2 VALUES ('김민기', 2020015, 'mingi_kim@tmax.co.kr', '010-8555-9387', '');
-INSERT INTO AB1_2 VALUES ('김상윤', 2020365, 'sangyoon_kim@tmax.co.kr', '010-9100-8450', 5093);
-INSERT INTO AB1_2 VALUES ('김혜진', 2020085, 'hyejin_kim@tmax.co.kr', '010-2090-9215', 5100);
-INSERT INTO AB1_2 VALUES ('김민지', 2020038, 'minji_kim@tmax.co.kr', '010-6348-7983', 5096);
-INSERT INTO AB1_2 VALUES ('한주형', 2020428, 'joohyeong_han@tmax.co.kr', '010-7111-4604', 5098);
+INSERT INTO AB1_2 VALUES ('정민수', 2019150, 'minsoo_sung@tmax.co.kr', '010-2301-5625', 5138, TO_DATE('1992-09-29', 'YYYY-MM-DD'));
+INSERT INTO AB1_2 VALUES ('진재혁', 2018139, 'jaehyeok_jin@tmax.co.kr', '010-5062-9197', 5021, TO_DATE('1992-08-21', 'YYYY-MM-DD'));
+INSERT INTO AB1_2 VALUES ('정춘순', 2019268, 'chungsun_jeong@tmax.co.kr', '010-9957-1931', 5062, TO_DATE('1994-10-21', 'YYYY-MM-DD'));
+INSERT INTO AB1_2 VALUES ('김민기', 2020015, 'mingi_kim@tmax.co.kr', '010-8555-9387', '', TO_DATE('1995-03-31', 'YYYY-MM-DD'));
+INSERT INTO AB1_2 VALUES ('김상윤', 2020365, 'sangyoon_kim@tmax.co.kr', '010-9100-8450', 5093, TO_DATE('1992-08-01', 'YYYY-MM-DD'));
+INSERT INTO AB1_2 VALUES ('김혜진', 2020085, 'hyejin_kim@tmax.co.kr', '010-2090-9215', 5100, TO_DATE('1994-09-29', 'YYYY-MM-DD'));
+INSERT INTO AB1_2 VALUES ('김민지', 2020038, 'minji_kim@tmax.co.kr', '010-6348-7983', 5096, TO_DATE('1996-04-26', 'YYYY-MM-DD'));
+INSERT INTO AB1_2 VALUES ('한주형', 2020428, 'joohyeong_han@tmax.co.kr', '010-7111-4604', 5098, TO_DATE('1988-10-10', 'YYYY-MM-DD'));
 
 COMMIT;
 

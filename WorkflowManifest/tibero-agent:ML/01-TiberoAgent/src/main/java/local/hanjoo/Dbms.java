@@ -91,36 +91,30 @@ public class Dbms {
             if (!Folder.exists()) {
                 Folder.mkdir();
             }
-
-            String fileContent = "";
-
             try {
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(sql);
+
+                BufferedWriter writer = new BufferedWriter(new FileWriter(path + "//" + col + ".txt"));
                 try {
                     while (rs.next()) {
                         if (rs.getString(col) == null) {
-                            fileContent += " ";
+                            writer.write("null");
                         } else {
-                            fileContent += rs.getString(col);
+                            writer.write(rs.getString(col));
                         }
-                        fileContent += " ";
+                        writer.newLine();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
+                    writer.close();
                     rs.close();
                     st.close();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
-            BufferedWriter writer = new BufferedWriter(new FileWriter(path + "//" + col + ".txt"));
-
-            writer.write(fileContent);
-            writer.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
