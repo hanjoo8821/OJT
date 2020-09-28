@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-ojt-result
+  namespace: kubeflow
+  # finalizers:
+  #     - "null"
+spec:
+  storageClassName: ojt-tibero-result
+  capacity:
+    storage: 1Gi
+  persistentVolumeReclaimPolicy: Recycle
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: /home/hanjoo/work/OJT/Tibero-ML-pipeline/WAS/static/images

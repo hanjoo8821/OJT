@@ -1,1 +1,15 @@
-java -cp "./JdbcAgentEx-ML.jar:./lib/tibero/tibero6jdbc/1.0/tibero6jdbc-1.0.jar" local.hanjoo.JdbcAgent args[0] args[1] args[2] ...
+java -cp "./JdbcAgentEx-ML.jar:./lib/tibero/tibero6jdbc/1.0/tibero6jdbc-1.0.jar" local.hanjoo.JdbcAgent {id} {pw} {sql} {col1} {col2} {col3}
+
+
+
+
+ex)
+
+{id} = hanjoo
+{pw} = 1010
+{sql} = "SELECT * FROM AB1_2 LEFT JOIN ACCOUNTING ON AB1_2.EMP_NUM = ACCOUNTING.EMP_NUM"
+{col1} = EMP_NUM
+{col2} = BIRTH
+{col3} = SALARY
+
+java -cp "./JdbcAgentEx-ML.jar:./lib/tibero/tibero6jdbc/1.0/tibero6jdbc-1.0.jar" local.hanjoo.JdbcAgent hanjoo 1010 "SELECT * FROM AB1_2 LEFT JOIN ACCOUNTING ON AB1_2.EMP_NUM = ACCOUNTING.EMP_NUM" EMP_NUM BIRTH SALARY

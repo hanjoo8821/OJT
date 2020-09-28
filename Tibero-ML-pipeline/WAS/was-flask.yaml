@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: was-dep-pipe
+spec:
+  replicas: 2 
+  selector:
+    matchLabels:
+      app: was-flask
+  template:
+    metadata:
+      labels:
+        app: was-flask
+        env: stage
+    spec:
+      containers:
+      - name: was-cont-pipe
+        image: hanjoo8821/was-flask:ml-0.98
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - mountPath: "/WAS/static/images"
+          name: volume-ojt-was
+      volumes:
+      - name: volume-ojt-was
+        persistentVolumeClaim:
+          claimName: pvc-ojt-was
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: was-svc-pipe
+spec:
+  type: LoadBalancer
+  selector:
+    app: was-flask
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
